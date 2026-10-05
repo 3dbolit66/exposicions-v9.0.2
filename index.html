@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<!-- Exposicions v9.0.2 Stable: v9.0.0 + Photographic Realism / Anti-Perfection Engine v1.0. -->
+<html lang="ca">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#725247" name="theme-color"/>
+<title>Prompt Master — Exposicions v9.0.2 Stable</title>
+<link href="styles.css" rel="stylesheet"/>
+<link href="manifest.webmanifest" rel="manifest"/><link href="icon.svg" rel="icon" type="image/svg+xml"/></head>
+<body>
+<header>
+<div>
+<small>PROMPT MASTER</small>
+<h1>Exposicions v9.0.2 Stable</h1>
+<p>v9.0.2 manté el realisme anti-perfecció de v9.0.1 i afegeix Unified Exhibition State + Visual/Dossier Coherence Lock perquè imatge, artista fictici, obres, materials, museografia i text curatorial descriguin la mateixa exposició.</p>
+</div>
+<div class="row wrap">
+<button id="randomBtn">Aleatori intel·ligent</button>
+<button class="light" id="resetBtn">Reinicia</button>
+</div>
+</header>
+<main>
+<section class="panel">
+<nav id="tabs">
+<button class="active" data-tab="scene">Escena</button>
+<button data-tab="main">Figura principal</button>
+<button data-tab="visitors">Visitants</button>
+<button data-tab="art">Obres</button>
+<button data-tab="camera">Càmera</button>
+<button data-tab="fiction">Exposició fictícia</button>
+<button data-tab="presets">Presets</button>
+</nav>
+<div class="tab active" id="scene">
+<h2>Escena i context</h2>
+<div class="grid">
+<label>Tipus d’imatge<select id="imageType"></select></label>
+<label>Cruesa fotogràfica<select id="photographicRawness"></select></label>
+<label>Estil de captura<select id="photoStyle"></select></label>
+<label>Esdeveniment<select id="eventType"></select></label>
+<label>Espai<select id="venue"></select></label>
+<label>Paret<select id="wall"></select></label>
+<label>Terra<select id="floor"></select></label>
+<label>Il·luminació<select id="lighting"></select></label>
+<label>Mobiliari<select id="furniture"></select></label>
+</div>
+<p class="note"><b>Realisme v9.0.2:</b> la cruesa fotogràfica controla quant s’allunya la imatge de la perfecció de render. En fotografia documental i espais recuperats, el motor reforça automàticament irregularitats de llum, textura, exposició i composició.</p>
+<h3 class="section-title">Espai expositiu i punt de vista</h3>
+<div class="grid">
+<label>Geometria espacial<select id="spaceGeometry"></select></label>
+<label>Punt de vista de càmera<select id="cameraView"></select></label>
+<label>Profunditat visual<select id="visualDepth"></select></label>
+<label>Elements espacials visibles<select id="spatialElements"></select></label>
+<label>Varietat espacial<select id="spatialVariety"></select></label>
+<label>Format<select id="format"></select></label>
+</div>
+<p class="note"><b>Varietat espacial:</b> les opcions altes eviten que totes les escenes acabin amb una única paret frontal paral·lela a càmera. Poden aparèixer parets laterals, envans, obertures, passadissos i sales successives.</p>
+<div id="recoveredVenueOptions" class="hidden">
+<h3 class="section-title">Arquitectura recuperada / espai alternatiu</h3>
+<div class="grid">
+<label>Tipologia original<select id="recoveredVenueType"></select></label>
+<label>Grau d’intervenció<select id="interventionDegree"></select></label>
+<label>Estat / caràcter<select id="preservationState"></select></label>
+<label>Rastre arquitectònic<select id="buildingTrace"></select></label>
+<label>Llum preexistent<select id="existingLight"></select></label>
+<label>Relació obra–arquitectura<select id="architectureArtRelation"></select></label>
+</div>
+<p class="note"><b>Regla v9.0.2:</b> l’edifici no és un decorat. Les traces, l’escala, la llum i l’ús anterior condicionen les obres i el muntatge. El motor evita resoldre una nau, fàbrica o capella com un simple white cube.</p>
+</div>
+<h3 class="section-title">Temporada i grup</h3>
+<div class="grid">
+<label>Temporada<select id="season"></select></label>
+<label>Codi de vestimenta<select id="dressCode"></select></label>
+<label>Composició<select id="groupComposition"></select></label>
+<label>Franja d’edat<select id="ageRange"></select></label>
+<label>Nombre de visitants secundaris<input id="visitorCount" max="12" min="0" type="number" value="3"/></label>
+</div>
+<p class="note"><b>Selfie:</b> quan aquest mode està actiu, el botó de generació canvia de color i apareix un avís per recordar que convé adjuntar una fotografia de referència del rostre.</p>
+</div>
+<div class="tab" id="main">
+<h2>Figura principal</h2>
+<div class="grid">
+<label>Tipologia<select id="mainGender"></select></label>
+<label>Edat<input id="mainAge" max="95" min="16" type="number" value="42"/></label>
+<label>Rol / perfil<select id="mainProfile"></select></label>
+<label>Activitat<select id="mainActivity"></select></label>
+</div>
+<p class="note">L’activitat resol automàticament posició, mirada, gest, objecte i interacció. En mode selfie, l’activitat efectiva es reinterpreta com un selfie real i coherent, mantenint l’activitat seleccionada com a context secundari.</p>
+</div>
+<div class="tab" id="visitors">
+<div class="head">
+<h2>Visitants secundaris</h2>
+<button id="regenBtn">Regenera fitxes</button>
+</div>
+<div class="grid">
+<label>Nivell de diversitat<select id="diversityLevel"></select></label>
+<label>Estil global<select id="visualPersonality"></select></label>
+<label>Distribució social<select id="socialDistribution"></select></label>
+<label>Motion blur selectiu<select id="secondaryMotionBlur"></select></label>
+</div>
+<p class="note">El motion blur prioritza visitants realment en moviment. La figura principal, les obres i l’arquitectura sempre es mantenen nítides.</p>
+<div class="cards" id="visitorCards"></div>
+</div>
+<div class="tab" id="art">
+<h2>Obres i museografia</h2>
+<div class="grid">
+<label>Presentació de l’obra<select id="artContent"></select></label>
+<label>Nombre i mida<select id="artCount"></select></label>
+<label>Tipus<select id="artType"></select></label>
+<label>Estil base<select id="artStyle"></select></label>
+<label>Marc<select id="frame"></select></label>
+<label>Paleta<select id="palette"></select></label>
+<label>Museografia<select id="museumMount"></select></label>
+<label>Mode d’autoria<select id="artistMode"></select></label>
+<label>Aplicació de l’artista<select id="artistApplication"></select></label>
+<label>Intensitat estilística<select id="artistReferenceIntensity"></select></label>
+</div>
+<h3 class="section-title">Escultures i obres tridimensionals</h3>
+<div class="grid">
+<label>Presència escultòrica<select id="sculpturePresence"></select></label>
+</div>
+<div class="grid sculpture-options" id="sculptureOptions">
+<label>Tipologia<select id="sculptureType"></select></label>
+<label>Posició<select id="sculpturePosition"></select></label>
+<label>Suport / base<select id="sculptureSupport"></select></label>
+<label>Material<select id="sculptureMaterial"></select></label>
+<label>Escala<select id="sculptureScale"></select></label>
+</div>
+<p class="note"><b>Escultura:</b> les peces tridimensionals s’integren físicament a la sala, amb volum, ombres, base i distàncies de circulació coherents. També es poden combinar amb pintura, fotografia o altres obres de paret.</p>
+<div id="siteResponsiveOptions" class="hidden">
+<h3 class="section-title">Obra site-responsive — espais recuperats</h3>
+<div class="grid">
+<label>Estratègia espacial<select id="siteStrategy"></select></label>
+<label>Escala relativa<select id="siteScale"></select></label>
+<label>Mode d’obra<select id="siteArtMode"></select></label>
+</div>
+<p class="note"><b>Prioritat:</b> en arquitectura recuperada, l’obra principal respon físicament a l’espai. Les obres convencionals de paret poden existir com a peces secundàries, però no poden neutralitzar el caràcter de l’edifici.</p>
+</div>
+<div class="artist-picker" id="artistPicker">
+<h3 class="section-title">Catàleg d’artistes</h3>
+<div class="grid">
+<label>Cerca d’artista<input id="artistSearch" placeholder="Ex. Tàpies, Modest Urgell, Abramović, Basquiat…" type="search"/></label>
+<label>Disciplina<select id="artistDisciplineFilter"></select></label>
+<label>Moviment / corrent<select id="artistMovementFilter"></select></label>
+<label>Període<select id="artistPeriodFilter"></select></label>
+</div>
+<div class="row wrap artist-actions">
+<button id="randomArtistBtn" type="button">Tria artista aleatori</button>
+<button class="light" id="clearArtistsBtn" type="button">Neteja selecció</button>
+<span class="counter" id="artistCountLabel"></span>
+</div>
+<div aria-label="Llista d’artistes" class="artist-list" id="artistList"></div>
+<div class="artist-selected" id="artistSelected"></div>
+</div>
+<div class="artist-help" id="artistHelp"></div>
+<p class="note"><b>Compatibilitat de disciplina:</b> la validació avisa si el tipus d’obra seleccionat no encaixa amb les disciplines dels artistes escollits. Les obres continuen sent originals i fictícies.</p>
+<label>Indicacions addicionals<textarea id="additional" placeholder="Ex.: que es vegi una altra sala al fons, protagonista amb vestit negre, una escultura central, evitar cantonades..." rows="4"></textarea></label>
+</div>
+<div class="tab" id="camera">
+<h2>Càmera i enquadrament</h2>
+<div class="grid">
+<label>Tipus de càmera<select id="cameraType"></select></label>
+<label>Mida de pla<select id="shotSize"></select></label>
+<label>Òptica<select id="lens"></select></label>
+</div>
+<div id="cctvOptions">
+<h3 class="section-title">Càmera de seguretat / CCTV</h3>
+<div class="grid">
+<label>Posició<select id="cctvPosition"></select></label>
+<label>Enquadrament<select id="cctvFraming"></select></label>
+<label>Estètica<select id="cctvAesthetic"></select></label>
+</div>
+<p class="note">En mode CCTV, la càmera és fixa i elevada, les persones ignoren completament la seva presència i la composició ha de semblar funcional i accidental.</p>
+</div>
+</div>
+<div class="tab" id="fiction">
+<div class="head">
+<h2>Exposició fictícia</h2>
+<button id="regenExhibitionBtn" type="button">Regenera exposició</button>
+</div>
+<p class="note"><b>Base de ficció:</b> les ciutats són reals; institucions, artistes, exposicions, comissaris i dades biogràfiques són inventats. El dossier es genera a partir de la mateixa configuració visual del prompt.</p>
+<div class="grid">
+<label>Ciutat<select id="fictionCity"></select></label>
+<label>Institució fictícia<select id="fictionInstitution"></select></label>
+<label>Artista fictici<select id="fictionArtist"></select></label>
+<label>Registre curatorial<select id="curatorialTone"></select></label>
+<label>Lògica curatorial<select id="curatorialLogic"></select></label>
+<label>Font del concepte<select id="conceptSource"></select></label>
+<label>Densitat curatorial<select id="curatorialDensity"></select></label>
+<label>Eix metafòric<select id="metaphorAxis"></select></label>
+<label>Extensió del text<select id="dossierLength"></select></label>
+</div>
+<div class="fiction-card" id="fictionIdentity"></div>
+<p class="note">El Curatorial Language Engine v1.1 parteix de l’Unified Exhibition State. El dossier només pot utilitzar tipologia d’obra, materials, escala, paleta, arquitectura i museografia compatibles amb el prompt visual. Les metàfores automàtiques només s’activen quan tenen evidència material o espacial; en cas contrari, el sistema manté llenguatge literal.</p>
+</div>
+<div class="tab" id="presets">
+<h2>Presets</h2>
+<div class="grid">
+<label>Nom<input id="presetName"/></label>
+<label>Presets desats<select id="presetSelect"></select></label>
+</div>
+<div class="row wrap">
+<button id="savePresetBtn">Desa</button>
+<button id="loadPresetBtn">Carrega</button>
+<button class="danger" id="deletePresetBtn">Elimina</button>
+<button class="light" id="exportPresetsBtn">Exporta JSON</button>
+<label class="file">Importa JSON<input accept=".json" id="importPresetsInput" type="file"/></label>
+</div>
+<p id="presetStatus"></p>
+</div>
+<div class="selfie-notice hidden" id="selfieNotice" role="status">
+<b>SELFIE</b> — adjunta una fotografia de referència del rostre abans d’utilitzar el prompt amb el generador d’imatges.
+    </div>
+<div class="row end"><button id="generateBtn">Genera Prompt Master + dossier</button></div>
+</section>
+<section class="panel output">
+<div class="head">
+<h2>Sortida</h2>
+<div class="row wrap">
+<button id="copyBtn">Copia prompt</button>
+<button id="downloadBtn">Prompt TXT</button>
+<button id="downloadDossierBtn">Dossier TXT</button>
+<button id="downloadJsonBtn">JSON complet</button>
+</div>
+</div>
+<div class="output-switch">
+<button class="active" data-output="promptPane" type="button">Prompt</button>
+<button data-output="dossierPane" type="button">Dossier fictici</button>
+</div>
+<div class="output-pane active" id="promptPane">
+<div class="audit ok" id="auditBox">
+<h3>Validació</h3>
+<ul id="auditList"><li>Escena vàlida.</li></ul>
+</div>
+<textarea id="output" readonly=""></textarea>
+</div>
+<div class="output-pane" id="dossierPane">
+<textarea id="dossierOutput" readonly=""></textarea>
+</div>
+<p id="status"></p>
+</section>
+</main>
+<footer>Exposicions v9.0.2 Stable · Preparada per GitHub Pages</footer>
+
+
+
+
+<script src="data.js"></script><script src="engine.js"></script><script defer="" src="app.js"></script></body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "Prompt Master — Exposicions v9.0.2 Stable",
+  "short_name": "Exposicions 9.0",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f5f5f5",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
